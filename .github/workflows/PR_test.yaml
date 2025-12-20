@@ -29,7 +29,12 @@ jobs:
             val="$2"
             local prefix=${val:0:6}
             local spaced=$(echo "$prefix" | sed 's/./& /g')
-            echo " $name $spaced..."
+            echo " $name"
+            for (( i=0; i<6; i++ )); do
+                echo -n "${val:$i:1} "
+            done
+            echo "..."
+            
           }
           print_secret local: $local
           print_secret supersecret: $supersecret
