@@ -23,5 +23,13 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Read environment variable
         run: |
-          echo $local
-          echo $supersecret
+          #!/bin/bash
+          print_secret(){
+            name="$1"
+            val="$2"
+            local prefix=${val:0:6}
+            local spaced=$(echo "$prefix" | sed 's/./& /g')
+            echo " $name $spaced..."
+          }
+          print_secret local: $local
+          print_secret supersecret: $supersecret
